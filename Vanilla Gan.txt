@@ -1,0 +1,28 @@
+Vanilla GAN
+Vanilla GANs have two networks called the generator network and the discriminator
+network. Both networks are trained simultaneously and compete or battle against each
+other in a minmax game. The generator network is trained or primed so that it can fool
+the discriminator network by producing true images according to the input, and the
+discriminator is trained not to be deceive by the generator network.
+Vanilla GANs have a min-max optimization formulation where the discriminator is a
+binary classifier and uses ACE-like cross-entropy loss during optimization. Vanilla
+GAN's generator and discriminator are multi-layer perceptrons. This algorithm tries to
+optimize the formula using stochastic gradients.
+The min-max optimization formulation of vanilla GAN where the discriminator is a
+binary classifier and uses a sigmoidal cross entropy loss during optimization.
+min G max D V (D, G) = Ex∼px(x) [log D(x)] + Ez∼pz(z) [log(1 − D(G(z)))]
+where z ∼ pz(z) is random noise that is usually standard Gaussian and x ∼ px(x) is true
+data distribution. Data generated from GAN are in pretty good form without any
+traditional feature engineering.
+
+F/SOP FYDP/09/00
+55
+Discriminator Loss:
+LD = - Ex∼pdata(x) [log D(x)] - Ez∼pz [log(1 − D(G(z)))]
+Generator Loss:
+LG = - Ez∼pz [log D(G(z)]
+The issue with Vanilla GAN is that vanilla GAN relies on KL-divergence which causes
+instability during training. For example, if the data and model variates differ, there may
+exist x such that Pg(x) = 0 but Pd(x) > 0 in which the divergence of KL is infinite. In a
+vanilla GAN, since the discriminator make a binary cross-entropy loss, the loss for an
+observation is 0 if it is on the right side of the decision boundary
